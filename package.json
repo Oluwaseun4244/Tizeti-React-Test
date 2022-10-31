@@ -1,5 +1,4 @@
 {
-  "homepage": "https://oluwaseun4244.github.io/tizeti-react-test",
   "name": "hacker-dormitory",
   "version": "0.1.0",
   "private": true,
@@ -15,9 +14,6 @@
     "save": "^2.3.1"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
     "prestart": "npm install",
     "pretest": "npm install",
     "start": "cross-env HOST=0.0.0.0 PORT=8000 ./node_modules/.bin/react-scripts start",
