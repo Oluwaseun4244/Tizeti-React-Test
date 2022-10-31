@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import swal from "@sweetalert/with-react";
 import { STUDENTS } from "../studentsList";
 
 // `joiningDate` && `validityDate` format "yyyy-mm-dd"
@@ -16,6 +17,14 @@ function Search({ setErrorMsg, setPassedList, passedList }) {
       studentDetails.studentName.toLocaleLowerCase()
   );
 
+  const handleSubmit = (e) => {
+	  e.preventDefault();
+	if (!studentDetails.studentName.length || !studentDetails.joiningDate.length) {
+		swal("error", "Student Name or Joining Date cannot be empty!", "error");
+		return;
+	  }
+    checkValidity(studentDetails.joiningDate, "");
+  };
 
   function checkValidity(joiningDate, validityDate) {
     let studentObj = "";
@@ -54,9 +63,10 @@ function Search({ setErrorMsg, setPassedList, passedList }) {
         studentName: "",
         joiningDate: "",
       });
-	  setErrorMsg("");
+      setErrorMsg("");
       setPassedList([...passedList, studentObj]);
     }
+
     // return maxValid >= selected && maxValid >= today;
   }
 
@@ -64,42 +74,44 @@ function Search({ setErrorMsg, setPassedList, passedList }) {
     setStudentDetails({ ...studentDetails, [e.target.id]: e.target.value });
   };
   return (
-    <div className="my-50 layout-row align-items-end justify-content-end">
-      <label htmlFor="studentName">
-        Student Name:
-        <div>
-          <input
-            id="studentName"
-            onChange={handleChange}
-            data-testid="studentName"
-            type="text"
-            className="mr-30 mt-10"
-            value={studentDetails.studentName}
-          />
-        </div>
-      </label>
-      <label htmlFor="joiningDate">
-        Joining Date:
-        <div>
-          <input
-            id="joiningDate"
-            onChange={handleChange}
-            data-testid="joiningDate"
-            type="date"
-            className="mr-30 mt-10"
-            value={studentDetails.joiningDate}
-          />
-        </div>
-      </label>
-      <button
-        type="button"
-        onClick={() => checkValidity(studentDetails.joiningDate, "")}
-        data-testid="addBtn"
-        className="small mb-0"
-      >
-        Add
-      </button>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div className="my-50 layout-row align-items-end justify-content-end">
+        <label htmlFor="studentName">
+          Student Name:
+          <div>
+            <input
+              id="studentName"
+              onChange={handleChange}
+              data-testid="studentName"
+              type="text"
+              className="mr-30 mt-10"
+              value={studentDetails.studentName}
+            />
+          </div>
+        </label>
+        <label htmlFor="joiningDate">
+          Joining Date:
+          <div>
+            <input
+              id="joiningDate"
+              onChange={handleChange}
+              data-testid="joiningDate"
+              type="date"
+              className="mr-30 mt-10"
+              value={studentDetails.joiningDate}
+            />
+          </div>
+        </label>
+        <button
+          type="submit"
+          // onClick={}
+          data-testid="addBtn"
+          className="small mb-0"
+        >
+          Add
+        </button>
+      </div>
+    </form>
   );
 }
 
