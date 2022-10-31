@@ -20,7 +20,7 @@ function App() {
           passedList={passedList}
         />
 
-        {errorMsg.length && <Error errorMsg={errorMsg} />}
+        {errorMsg.length ? <Error errorMsg={errorMsg} /> : <></>}
 
         <ResidentsList students={passedList} />
       </div>

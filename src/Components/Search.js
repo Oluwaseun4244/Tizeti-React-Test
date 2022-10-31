@@ -54,6 +54,7 @@ function Search({ setErrorMsg, setPassedList, passedList }) {
         studentName: "",
         joiningDate: "",
       });
+	  setErrorMsg("");
       setPassedList([...passedList, studentObj]);
     }
     // return maxValid >= selected && maxValid >= today;
